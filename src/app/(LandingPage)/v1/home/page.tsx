@@ -117,7 +117,7 @@ export default function Home() {
       id: 2,
       name: "Michael Chen",
       position: "Procurement Manager, Gadget World",
-      content: "Working with Anantya has been seamless. Their platform simplifies the entire import process from China.",
+      content: "Working with Anantya has been seamless. Their platform simplifies the entire import process.",
       image: "/api/placeholder/64/64"
     },
     {
@@ -174,7 +174,7 @@ export default function Home() {
           >
             <motion.div variants={fadeIn}>
               <h2 className="text-5xl font-bold leading-tight text-gray-900">
-                Your Gateway to Premium <span className="text-blue-600">Tech Imports</span> from China
+                Your Gateway to Premium <span className="text-blue-600">Tech Imports</span>
               </h2>
               <p className="mt-6 text-lg text-gray-600">
                 Anantya connects you with verified manufacturers, streamlines logistics, and ensures quality at every step.
@@ -454,7 +454,7 @@ export default function Home() {
       <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Trusted Partners</h2>
       <div className="w-32 h-1.5 bg-blue-600 mx-auto mb-6"></div>
       <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-        We collaborate with leading tech manufacturers and logistics providers across China
+        We collaborate with leading tech manufacturers and logistics providers across the globe
       </p>
     </div>
     
@@ -538,7 +538,7 @@ export default function Home() {
     <div className="max-w-3xl mx-auto text-center">
       <h2 className="text-4xl font-bold mb-6">Join Our Community</h2>
       <p className="text-xl text-blue-100 mb-10">
-        Connect with fellow importers, get exclusive deals, and stay updated with the latest tech trends from China.
+        Connect with fellow importers, get exclusive deals, and stay updated with the latest tech trends.
       </p>
       
       <div className="flex flex-col sm:flex-row justify-center gap-6">
@@ -562,7 +562,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
               <h3 className="text-xl font-bold text-white mb-4">Anantya</h3>
-              <p className="mb-4">Your trusted partner for premium tech imports from China.</p>
+              <p className="mb-4">Your trusted partner for premium tech imports.</p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white">
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
