@@ -44,6 +44,24 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState("electronics");
   const [stats, setStats] = useState({ products: 0, partners: 0, clients: 0 });
+  const [isClient,setIsClient] = useState(false);
+  const [radius,setRadius] = useState(240);
+
+  // Radius handling
+  useEffect(()=>{
+    setIsClient(true)
+    const handleResize =()=>{
+      setRadius(()=>{
+     return  window.innerWidth < 768 ? 180 : 240
+      })
+    }
+    handleResize()
+    window.addEventListener("resize",handleResize)
+
+    return ()=>{
+      window.removeEventListener("resize",handleResize)
+    }
+  },[])
 
   // Analytics counter animation
   useEffect(() => {
@@ -138,7 +156,6 @@ export default function Home() {
     { name: "Quantum Devices", logo: "/comp5.png", }
   ];
   
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Unique Header Positioning - Top left corner with diagonal component */}
@@ -479,10 +496,10 @@ export default function Home() {
       {/* Orbiting partners - enlarged */}
       {partners.map((partner, index) => {
         const angle = (index / partners.length) * Math.PI * 2;
-        const radius = window.innerWidth < 768 ? 180 : 240; // Larger radius on desktop
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
         
+        if (!isClient) return null; // Ensure this only runs on the client side
         return (
           <motion.div
             key={index}
