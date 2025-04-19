@@ -9,10 +9,13 @@ import Video from "@/components/ui/home/video";
 import Testimonials from "@/components/ui/home/testimonials";
 import Partners from "@/components/ui/home/partners";
 import Categories from "@/components/ui/home/categories";
+import PhoneSidebar from "@/components/ui/home/phonenav";
 
 export default function AnantyaOverseasUI() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="bg-gray-50">
+
+      <PhoneSidebar/>
       {/* Enhanced Navbar */}
       <HomeNavbar />
 

@@ -8,8 +8,8 @@ export default function HeroSection() {
       <m.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="absolute left-3 top-0 z-50 w-full h-full flex flex-col items-center justify-items-center"
+        transition={{ duration: 0.5 }}
+        className="absolute left-3 top-0 z-1 w-full h-full flex flex-col items-center justify-items-center p-3"
       >
         <div className="max-w-2xl space-y-6">
           <div className="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mt-8">
