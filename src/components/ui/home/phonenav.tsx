@@ -45,7 +45,7 @@ export default function PhoneSidebar() {
   ];
 
   return (
-    <div className="md:hidden block absolute top-4 right-4 z-[99999]">
+    <div className="md:hidden block absolute top-4 right-4 z-[1000]">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button

@@ -1,5 +1,5 @@
 "use client";
-import {useInView, LazyMotion, domAnimation, m } from "framer-motion";
+import { useInView, LazyMotion, domAnimation, m } from "framer-motion";
 import { BarChart3, Globe, Users } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -16,11 +16,16 @@ export default function Metrics() {
   useEffect(() => {
     if (isInView) {
       const interval = setInterval(() => {
-        setStats((prev) => ({
-          products: prev.products < 5000 ? prev.products + 50 : 5000,
-          partners: prev.partners < 200 ? prev.partners + 10 : 200,
-          clients: prev.clients < 1000 ? prev.clients + 30 : 1000,
-        }));
+        setStats((prev) => {
+          const updated = {
+            products: prev.products < 5000 ? prev.products + 50 : 5000,
+            partners: prev.partners < 200 ? prev.partners + 10 : 200,
+            clients: prev.clients < 1000 ? prev.clients + 30 : 1000,
+          };
+
+          if (updated.products === 5000) clearInterval(interval);
+          return updated;
+        });
       }, 30);
 
       return () => {

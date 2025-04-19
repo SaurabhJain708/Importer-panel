@@ -26,12 +26,12 @@ export default function Community(){
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Button className="bg-green-600 hover:bg-green-700 text-white flex items-center justify-center gap-3 px-8 py-6 text-lg">
+              <Button className="bg-green-600 cursor-pointer hover:bg-green-700 text-white flex items-center justify-center gap-3 px-8 py-6 text-lg">
                 <MessageCircle className="h-6 w-6" />
                 WhatsApp Community
               </Button>
 
-              <Button className="bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center gap-3 px-8 py-6 text-lg">
+              <Button className="bg-blue-500 cursor-pointer hover:bg-blue-600 text-white flex items-center justify-center gap-3 px-8 py-6 text-lg">
                 <Send className="h-6 w-6" />
                 Telegram Channel
               </Button>

@@ -22,7 +22,7 @@ export default function HeroSection() {
             <span className="text-blue-600">Made Simple</span>
           </h1>
 
-          <p className="text-white text-sm text-shadow-amber-50 md:text-lg">
+          <p className="text-white text-sm text-shadow-amber-50 md:text-lg text-wrap font-bold">
             Streamline your international procurement with our end-to-end import
             management services and global supplier network.
           </p>

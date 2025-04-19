@@ -26,11 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased m-0 p-0 w-full h-full`}
       >
         <div>
           <PhoneSidebar/>
-          <main>{children}</main>
+          <main className="m-0 p-0 w-full h-full">{children}</main>
         </div>
       </body>
     </html>
