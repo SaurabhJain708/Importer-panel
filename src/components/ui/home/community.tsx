@@ -1,15 +1,17 @@
 import { MessageCircle, Send } from "lucide-react";
 import { Button } from "../button";
+import Image from "next/image";
 
 export default function Community(){
     return(
         <section className="relative py-24 px-4 text-white overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="/community.jpg"
             alt="Community Background"
-            className="w-full h-full object-cover object-center"
+            className="object-cover object-center"
+            fill
           />
           <div className="absolute inset-0 bg-blue-900/80"></div>
         </div>
