@@ -66,21 +66,10 @@ export const authOptions: NextAuthOptions = {
             }
           } catch (error) {
             console.log(error);
-            try {
-              const retryUser = await User.create({
-                email: user.email,
-                name: user.name,
-                image: user.image,
-              });
-              token.id = retryUser.id;
-              token.role = retryUser.isAdmin ? "admin" : "user";
-            } catch (err) {
-              console.log(err);
-            }
           }
         } else {
           token.id = user.id as string;
-          token.role = user.role ? user.role : ("user" as string);
+          token.role = user.role ?? "user" as string;
         }
       }
       return token;

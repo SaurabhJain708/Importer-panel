@@ -95,7 +95,7 @@ const MOCK_PRODUCTS = [
 ];
 
 // Category icons (unchanged)
-const CATEGORY_ICONS = {
+const CATEGORY_ICONS: any = {
   "All Products": <SearchOutlined />,
   Laptops: <LaptopOutlined />,
   Smartphones: <MobileOutlined />,

@@ -238,7 +238,7 @@ export default function CategoriesPage() {
 }
 
 // Component for standard category card
-function CategoryCard({ category }) {
+function CategoryCard({ category }:{category:any}) {
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg group">
       <div className="relative overflow-hidden h-48">
@@ -266,7 +266,7 @@ function CategoryCard({ category }) {
 }
 
 // Component for featured category cards (larger with different layout)
-function FeaturedCategoryCard({ category }) {
+function FeaturedCategoryCard({ category }:{category:any}) {
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg group bg-blue-50 dark:bg-gray-800/50 border-blue-200 dark:border-blue-900">
       <div className="p-6">
