@@ -2,13 +2,18 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { User } from "@/models/user.model";
 import { mongoDb } from "./dbConnect";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "example@gmail.com" },
+        email: {
+          label: "Email",
+          type: "text",
+          placeholder: "example@gmail.com",
+        },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
@@ -30,6 +35,10 @@ export const authOptions: NextAuthOptions = {
         };
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
   callbacks: {
     async session({ session, token }) {
@@ -37,10 +46,42 @@ export const authOptions: NextAuthOptions = {
       session.user.role = token.role as string;
       return session;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account, profile }) {
       if (user) {
-        token.id = user.id as string;
-        token.role = user.role as string;
+        await mongoDb();
+        if (account?.provider === "google") {
+          try {
+            const existingUser = await User.findOne({ email: user.email });
+            if (!existingUser) {
+              const newUser = await User.create({
+                email: user.email,
+                name: user.name,
+                image: user.image,
+              });
+              token.id = newUser.id;
+              token.role = newUser.isAdmin ? "admin" : "user";
+            } else {
+              token.id = existingUser.id as string;
+              token.role = existingUser.isAdmin ? "admin" : "user";
+            }
+          } catch (error) {
+            console.log(error);
+            try {
+              const retryUser = await User.create({
+                email: user.email,
+                name: user.name,
+                image: user.image,
+              });
+              token.id = retryUser.id;
+              token.role = retryUser.isAdmin ? "admin" : "user";
+            } catch (err) {
+              console.log(err);
+            }
+          }
+        } else {
+          token.id = user.id as string;
+          token.role = user.role ? user.role : ("user" as string);
+        }
       }
       return token;
     },
