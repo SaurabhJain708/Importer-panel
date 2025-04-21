@@ -1,34 +1,55 @@
-import { Ship } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HomeNavbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-[2] bg-white shadow-md py-4">
+    <header className="fixed top-0 left-0 right-0 z-[199] bg-white shadow-md py-4">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between">
           {/* Logo & Brand */}
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-600 p-3 rounded-xl shadow-md">
-              <Ship className="text-white" size={28} />
-            </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
-              Anantya Overseas
-            </h1>
+          <div className="flex items-center gap-3  bg-amber-500 relative">
+            <Image
+              src="/Anan.png"
+              alt="Community Background"
+              className="object-cover object-center"
+              fill
+            />
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            {["Home", "Products", "Services", "About", "Contact"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
-              >
-                {item}
-              </a>
-            ))}
             <Link
-              href="/login"
+              href="/v1/home1"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+            >
+              Home
+            </Link>
+            <Link
+              href="/products"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+            >
+              Products
+            </Link>
+            <Link
+              href="/v1/services"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+            >
+              Services
+            </Link>
+            <Link
+              href="/v1/about"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+            >
+              About
+            </Link>
+            <Link
+              href="/v1/contact"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+            >
+              Contact
+            </Link>
+            <Link
+              href="/v1/login"
               className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
             >
               Login
