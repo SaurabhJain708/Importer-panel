@@ -19,11 +19,14 @@ export default function SigninPage() {
         </div>
       </div>
       <div className="relative hidden bg-muted lg:block">
-        <img
-          src="/placeholder.svg"
-          alt="Image"
-          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        />
+      <video
+      src="/loginvid.mp4"
+      autoPlay
+      muted
+      loop
+      preload="none"
+      className=" object-cover w-full h-full z-0"
+    ></video>
       </div>
     </div>
   )
