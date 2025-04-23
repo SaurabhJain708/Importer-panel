@@ -3,19 +3,16 @@ import Link from "next/link";
 
 export default function HomeNavbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-[199]  bg-white shadow-md py-4">
+    <header className="fixed top-0 left-0 right-0 z-[1] h-20  bg-white   flex flex-col justify-center">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between">
           {/* Logo & Brand */}
-          <div className="flex items-center gap-3  bg-amber-500 relative">
-            <Image
-              src="/Anan.png"
-              alt="Community Background"
-              className="object-cover object-center"
-              fill
-            />
+          <div className="relative bg-black h-22 w-64">
+            <Image src="/Anan.png"
+            alt="Community Background"
+            className="object-cover object-center"
+            fill/>
           </div>
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
             <Link
@@ -25,7 +22,7 @@ export default function HomeNavbar() {
               Home
             </Link>
             <Link
-              href="/products"
+              href="/v2/products"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
             >
               Products
@@ -37,7 +34,7 @@ export default function HomeNavbar() {
               Services
             </Link>
             <Link
-              href="/v1/about"
+              href="/v1/about-us"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
             >
               About

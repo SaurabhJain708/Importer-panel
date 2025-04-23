@@ -1,7 +1,7 @@
 export default function Video(){
     return(
         <video
-                  src="/ship.mp4"
+                  src="/sh"
                   autoPlay
                   muted
                   loop
