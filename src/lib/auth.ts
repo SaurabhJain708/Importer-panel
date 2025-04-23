@@ -1,8 +1,10 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { User } from "@/models/user.model";
+import { AppUser } from "@/models/user.model";
 import { mongoDb } from "./dbConnect";
 import GoogleProvider from "next-auth/providers/google";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import clientPromise from "./dbClient";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -21,7 +23,7 @@ export const authOptions: NextAuthOptions = {
 
         if (!credentials?.email || !credentials?.password) return null;
 
-        const user = await User.findOne({ email: credentials.email });
+        const user = await AppUser.findOne({ email: credentials.email });
         if (!user) return null;
 
         const validPassword = await user.comparePassword(credentials.password);
@@ -41,38 +43,30 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async session({ session, token }) {
-      session.user.id = token.id as string;
-      session.user.role = token.role as string;
+    async session({ session }) {
+      const db = (await clientPromise).db();
+      const newuser =await db
+        .collection("users")
+        .findOne({ email: session.user.email });
+      if (newuser) {
+        session.user.id = newuser._id.toString();
+        session.user.role = newuser.isAdmin ?? "user";
+      }
       return session;
     },
-    async jwt({ token, user, account, profile }) {
-      if (user) {
-        await mongoDb();
-        if (account?.provider === "google") {
-          try {
-            const existingUser = await User.findOne({ email: user.email });
-            if (!existingUser) {
-              const newUser = await User.create({
-                email: user.email,
-                name: user.name,
-                image: user.image,
-              });
-              token.id = newUser.id;
-              token.role = newUser.isAdmin ? "admin" : "user";
-            } else {
-              token.id = existingUser.id as string;
-              token.role = existingUser.isAdmin ? "admin" : "user";
-            }
-          } catch (error) {
-            console.log(error);
-          }
-        } else {
-          token.id = user.id as string;
-          token.role = user.role ?? "user" as string;
-        }
+    async signIn({ user, account }) {
+      const db = (await clientPromise).db();
+      const updatedUser = await db.collection("users").updateOne(
+        { email: user.email },
+        {
+          $setOnInsert: { isAdmin: false },
+        },
+        { upsert: true }
+      );
+      if(updatedUser){
+        return true
       }
-      return token;
+      return false
     },
   },
   pages: {
@@ -80,8 +74,9 @@ export const authOptions: NextAuthOptions = {
     error: "/login",
   },
   session: {
-    strategy: "jwt",
+    strategy: "database",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
+  adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
 };
