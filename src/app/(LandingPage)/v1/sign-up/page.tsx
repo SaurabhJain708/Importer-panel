@@ -1,7 +1,6 @@
 import { GalleryVerticalEnd } from "lucide-react"
-import { LoginForm } from "@/components/login-form"
 import SignupPage from "@/components/signup-form"
-export default function SignPage() {
+export default function SigninPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
@@ -13,17 +12,20 @@ export default function SignPage() {
           </a>
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-xs">
-            <SignupPage/>
+          <div className="w-full max-w-xl">
+            <SignupPage />
           </div>
         </div>
       </div>
       <div className="relative hidden bg-muted lg:block">
-        <img
-          src="/placeholder.svg"
-          alt="Image"
-          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        />
+      <video
+      src="/loginvid.mp4"
+      autoPlay
+      muted
+      loop
+      preload="none"
+      className=" object-cover w-full h-full z-0"
+    ></video>
       </div>
     </div>
   )
