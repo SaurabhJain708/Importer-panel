@@ -1,7 +1,7 @@
 import { ApiResponse } from "@/lib/ApiResponse";
 import { mongoDb } from "@/lib/dbConnect";
 import { ApiError } from "@/lib/ErrorResponse";
-import { User } from "@/models/user.model";
+import { AppUser } from "@/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -13,13 +13,13 @@ export async function POST(req: NextRequest) {
         status: 400,
       });
     }
-    const existingUser = await User.findOne({ email });
+    const existingUser = await AppUser.findOne({ email });
     if (existingUser) {
       return NextResponse.json(new ApiError(400, "User already exists"), {
         status: 400,
       });
     }
-    const newUser = await User.create({ email, password });
+    const newUser = await AppUser.create({ email, password });
     if (!newUser) {
       return NextResponse.json(
         new ApiError(500, "Internal server error while adding new user"),
