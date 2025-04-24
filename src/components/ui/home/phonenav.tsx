@@ -20,22 +20,22 @@ export default function PhoneSidebar() {
   const navItems = [
     {
       label: "Dashboard",
-      href: "/dashboard",
+      href: "/v2/dashboard",
       icon: LayoutDashboard,
     },
     {
       label: "Sign In",
-      href: "/sign-in",
+      href: "/v1/login",
       icon: LogIn,
     },
     {
-      label: "Features",
-      href: "/features",
+      label: "Services",
+      href: "/v1/services",
       icon: Star,
     },
     {
       label: "About Us",
-      href: "/about-us",
+      href: "/v1/about-us",
       icon: Info,
     },
     {

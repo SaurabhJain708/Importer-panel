@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { FcGoogle } from "react-icons/fc"
 import { Eye, EyeOff } from "lucide-react"
+import {signIn} from "next-auth/react"
 
 // Zod Schema
 const signupSchema = z.object({
@@ -36,9 +37,8 @@ export default function SignupPage() {
     // Add signup logic here
   }
 
-  const handleGoogleSignup = () => {
-    console.log("Sign up with Google")
-    // Add Google OAuth logic here
+  const GoogleSignIn = ()=>{
+    signIn("google",{callbackUrl:"/v2/dashboard"})
   }
 
   return (
@@ -107,7 +107,7 @@ export default function SignupPage() {
         <Button
           variant="outline"
           className="w-full cursor-pointer flex items-center justify-center gap-2 hover:bg-gray-100"
-          onClick={handleGoogleSignup}
+          onClick={GoogleSignIn}
         >
           <FcGoogle size={20} />
           Sign up with Google

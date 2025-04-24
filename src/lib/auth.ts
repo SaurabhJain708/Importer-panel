@@ -40,18 +40,31 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
     }),
   ],
   callbacks: {
-    async session({ session }) {
-      const db = (await clientPromise).db();
-      const newuser =await db
-        .collection("users")
-        .findOne({ email: session.user.email });
-      if (newuser) {
-        session.user.id = newuser._id.toString();
-        session.user.role = newuser.isAdmin ?? "user";
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
+        token.role = user.role;
+        token.id = user.id;
       }
+      return token;
+    },
+    async session({ session, token }) {
+      // This is safe — just enriching the session from the JWT
+      session.accessToken = token.accessToken;
+      session.refreshToken = token.refreshToken;
+      session.user.role = token.role;
+      session.user.id = token.id;
       return session;
     },
     async signIn({ user, account }) {
@@ -63,15 +76,15 @@ export const authOptions: NextAuthOptions = {
         },
         { upsert: true }
       );
-      if(updatedUser){
-        return true
+      if (updatedUser) {
+        return true;
       }
-      return false
+      return false;
     },
   },
   pages: {
-    signIn: "/login",
-    error: "/login",
+    signIn: "/v1/login",
+    error: "/v1/login",
   },
   session: {
     strategy: "database",

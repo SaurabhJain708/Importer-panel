@@ -183,7 +183,7 @@ export default function AboutUsPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2  gap-8">
           {[
             {
               name: "Roshan Yadav",
@@ -197,7 +197,7 @@ export default function AboutUsPage() {
             },
           ].map((member, index) => (
             <Card key={index}>
-              <div className="h-48 bg-gray-200 relative">
+              <div className="h-48 lg:h-96 bg-gray-200 relative">
                 <Image
                   src={`/avatar.png`}
                   alt={member.name}
