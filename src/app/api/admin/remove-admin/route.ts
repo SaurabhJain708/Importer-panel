@@ -8,22 +8,25 @@ export async function POST(req: NextRequest) {
   try {
     await mongoDb();
     const { userId } = await req.json();
-    const userToBeUpdated = await User.findOneAndUpdate(
+    const removedAdmin = await User.findOneAndUpdate(
       { _id: userId },
-      { isAdmin: true },
+      { isAdmin: false },
       { new: true }
     );
-    if (!userToBeUpdated) {
-      return NextResponse.json(new ApiError(404, "Admin not added"), {
+    if (!removedAdmin) {
+      return NextResponse.json(new ApiError(404, "Admin not removed"), {
         status: 500,
       });
     }
     return NextResponse.json(
-      new ApiResponse(200, null, "User updated successfully")
+      new ApiResponse(200, null, "Admin removed successfully")
     );
   } catch (error) {
-    return NextResponse.json(new ApiError(500, "Internal server error"), {
-      status: 500,
-    });
+    return NextResponse.json(
+      new ApiError(500, "Internal server error, Admin not removed"),
+      {
+        status: 500,
+      }
+    );
   }
 }
