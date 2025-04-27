@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function HomeNavbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-[199] h-20 flex flex-col justify-center  bg-white shadow-md py-4">
+    <header className="fixed top-0 left-0 right-0 z-1 h-20 flex flex-col justify-center  bg-white shadow-md py-4">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between">
           {/* Logo & Brand */}
@@ -15,7 +15,6 @@ export default function HomeNavbar() {
               fill
             />
           </div>
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
             <Link
@@ -25,7 +24,7 @@ export default function HomeNavbar() {
               Home
             </Link>
             <Link
-              href="/products"
+              href="/v2/products"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
             >
               Products
@@ -37,7 +36,7 @@ export default function HomeNavbar() {
               Services
             </Link>
             <Link
-              href="/v1/about"
+              href="/v1/about-us"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
             >
               About
@@ -49,7 +48,7 @@ export default function HomeNavbar() {
               Contact
             </Link>
             <Link
-              href="/v1/login"
+              href="/v1/sign-up"
               className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
             >
               Login

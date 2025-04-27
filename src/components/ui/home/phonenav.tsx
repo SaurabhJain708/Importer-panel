@@ -20,33 +20,33 @@ export default function PhoneSidebar() {
   const navItems = [
     {
       label: "Dashboard",
-      href: "/dashboard",
+      href: "/v2/dashboard",
       icon: LayoutDashboard,
     },
     {
       label: "Sign In",
-      href: "/sign-in",
+      href: "/v1/login",
       icon: LogIn,
     },
     {
-      label: "Features",
-      href: "/features",
+      label: "Services",
+      href: "/v1/services",
       icon: Star,
     },
     {
       label: "About Us",
-      href: "/about-us",
+      href: "/v1/about-us",
       icon: Info,
     },
     {
       label: "Careers",
-      href: "/careers",
+      href: "/v1/careers",
       icon: Briefcase,
     },
   ];
 
   return (
-    <div className="md:hidden fixed top-4 right-4 z-[200]">
+    <div className="md:hidden fixed top-4 right-4 z-[2]">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button
@@ -85,7 +85,7 @@ export default function PhoneSidebar() {
 
           {/* Bottom CTA */}
           <div className="p-4 border-t border-gray-200">
-            <Link href="/sign-up">
+            <Link href="/v1/sign-up">
               <Button
                 onClick={() => setOpen(false)}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md py-3"
@@ -100,4 +100,3 @@ export default function PhoneSidebar() {
     </div>
   );
 }
-
