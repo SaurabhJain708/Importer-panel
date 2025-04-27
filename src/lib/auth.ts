@@ -1,42 +1,10 @@
 import type { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { AppUser } from "@/models/user.model";
-import { mongoDb } from "./dbConnect";
 import GoogleProvider from "next-auth/providers/google";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import clientPromise from "./dbClient";
+import { User } from "../models/user.model"; // adjust path if needed
+import {mongoDb} from "@/lib/dbConnect"; // you must connect to MongoDB manually
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: {
-          label: "Email",
-          type: "text",
-          placeholder: "example@gmail.com",
-        },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials) {
-        await mongoDb();
-
-        if (!credentials?.email || !credentials?.password) return null;
-
-        const user = await AppUser.findOne({ email: credentials.email });
-        if (!user) return null;
-
-        const validPassword = await user.comparePassword(credentials.password);
-        if (!validPassword) return null;
-
-        return {
-          id: user._id!.toString(),
-          email: user.email,
-          name: user.name,
-          role: user.isAdmin ? "admin" : "user",
-        };
-      },
-    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
@@ -50,46 +18,51 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, account }) {
-      if (account && user) {
-        token.accessToken = account.access_token;
-        token.refreshToken = account.refresh_token;
-        token.role = user.role;
+    async signIn({ user, account, profile }) {
+      await mongoDb(); // make sure DB is connected
+
+      const existingUser = await User.findOne({ email: user.email });
+
+      if (!existingUser) {
+        // If not found, create a new user
+        await User.create({
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          isAdmin: false, // default
+        });
+      }
+      
+      return true; // allow sign in
+    },
+
+    async jwt({ token, user, account, profile }) {
+      if (user) {
         token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.picture = user.image;
       }
       return token;
     },
+
     async session({ session, token }) {
-      // This is safe — just enriching the session from the JWT
-      session.accessToken = token.accessToken;
-      session.refreshToken = token.refreshToken;
-      session.user.role = token.role;
-      session.user.id = token.id;
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.email = token.email as string;
+        session.user.name = token.name as string;
+        session.user.image = token.picture as string;
+      }
       return session;
     },
-    async signIn({ user, account }) {
-      const db = (await clientPromise).db();
-      const updatedUser = await db.collection("users").updateOne(
-        { email: user.email },
-        {
-          $setOnInsert: { isAdmin: false },
-        },
-        { upsert: true }
-      );
-      if (updatedUser) {
-        return true;
-      }
-      return false;
-    },
-  },
-  pages: {
-    signIn: "/v1/login",
-    error: "/v1/login",
   },
   session: {
-    strategy: "database",
+    strategy: "jwt", // <-- Important change
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/v1/login",
+    error: "/v1/login", // you can handle errors here if you want
+  },
 };

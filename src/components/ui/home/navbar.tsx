@@ -48,7 +48,7 @@ export default function HomeNavbar() {
               Contact
             </Link>
             <Link
-              href="/v1/login"
+              href="/v1/sign-up"
               className="ml-4 bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
             >
               Login

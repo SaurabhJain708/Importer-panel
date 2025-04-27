@@ -40,7 +40,7 @@ export default function PhoneSidebar() {
     },
     {
       label: "Careers",
-      href: "/careers",
+      href: "/v1/careers",
       icon: Briefcase,
     },
   ];
@@ -85,7 +85,7 @@ export default function PhoneSidebar() {
 
           {/* Bottom CTA */}
           <div className="p-4 border-t border-gray-200">
-            <Link href="/sign-up">
+            <Link href="/v1/sign-up">
               <Button
                 onClick={() => setOpen(false)}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md py-3"
@@ -100,4 +100,3 @@ export default function PhoneSidebar() {
     </div>
   );
 }
-
