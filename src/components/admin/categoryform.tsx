@@ -65,7 +65,7 @@ export default function CategoryForm() {
       <div>
         <label>Cover Image:</label>
         <input type="file" {...register('coverImage')} />
-        {errors.coverImage?.message && <p>{errors.coverImage?.message}</p>}
+        {errors.coverImage?.message && <p>{errors.coverImage?.message as string}</p>}
       </div>
 
       <button type="submit" disabled={isSubmitting}>
