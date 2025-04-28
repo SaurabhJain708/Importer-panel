@@ -1,21 +1,20 @@
 import { ApiResponse } from "@/lib/ApiResponse";
 import { mongoDb } from "@/lib/dbConnect";
 import { ApiError } from "@/lib/ErrorResponse";
-import Category from "@/models/category.model";
+import Item from "@/models/items.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
     await mongoDb();
-    const allCategories = await Category.find({}).sort({ createdAt: -1 });
-    if (!allCategories || allCategories.length === 0) {
-      return NextResponse.json(new ApiError(404, "No category data found"), {
+    const allItems = await Item.find({}).sort({ createdAt: -1 });
+    if (!allItems || allItems.length === 0) {
+      return NextResponse.json(new ApiError(404, "No Item data found"), {
         status: 404,
       });
     }
-
     return NextResponse.json(
-      new ApiResponse(200, allCategories, "Contact data fetched successfully"),
+      new ApiResponse(200, allItems, "Item data fetched successfully"),
       { status: 200 }
     );
   } catch (error) {
