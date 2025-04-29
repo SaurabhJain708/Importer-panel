@@ -48,10 +48,10 @@ export default function ItemForm() {
     if (data.stock !== undefined) formData.append("stock", String(data.stock));
     formData.append("isInStock", String(data.isInStock));
     formData.append("category", data.category);
-    formData.append("coverImage", data.coverImage[0]);
+    formData.append("file", data.coverImage[0]);
 
     try {
-      const response = await fetch("/api/items", {
+      const response = await fetch("/api/admin/add-items", {
         method: "POST",
         body: formData,
       });
@@ -74,7 +74,9 @@ export default function ItemForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Name input */}
         <div>
-          <label htmlFor="name" className="block text-lg font-medium">Name</label>
+          <label htmlFor="name" className="block text-lg font-medium">
+            Name
+          </label>
           <input
             type="text"
             id="name"
@@ -82,24 +84,34 @@ export default function ItemForm() {
             className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-invalid={errors.name ? "true" : "false"}
           />
-          {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>
+          )}
         </div>
 
         {/* Description input */}
         <div>
-          <label htmlFor="description" className="block text-lg font-medium">Description</label>
+          <label htmlFor="description" className="block text-lg font-medium">
+            Description
+          </label>
           <textarea
             id="description"
             {...register("description")}
             className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-invalid={errors.description ? "true" : "false"}
           />
-          {errors.description && <p className="text-red-600 text-sm mt-1">{errors.description.message}</p>}
+          {errors.description && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.description.message}
+            </p>
+          )}
         </div>
 
         {/* Cover image upload */}
         <div>
-          <label htmlFor="coverImage" className="block text-lg font-medium">Cover Image</label>
+          <label htmlFor="coverImage" className="block text-lg font-medium">
+            Cover Image
+          </label>
           <input
             type="file"
             id="coverImage"
@@ -107,12 +119,18 @@ export default function ItemForm() {
             className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-invalid={errors.coverImage ? "true" : "false"}
           />
-          {errors.coverImage && <p className="text-red-600 text-sm mt-1">{errors.coverImage?.message as string}</p>}
+          {errors.coverImage && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.coverImage?.message as string}
+            </p>
+          )}
         </div>
 
         {/* Price input */}
         <div>
-          <label htmlFor="price" className="block text-lg font-medium">Price</label>
+          <label htmlFor="price" className="block text-lg font-medium">
+            Price
+          </label>
           <input
             type="number"
             step="0.01"
@@ -121,12 +139,16 @@ export default function ItemForm() {
             className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-invalid={errors.price ? "true" : "false"}
           />
-          {errors.price && <p className="text-red-600 text-sm mt-1">{errors.price.message}</p>}
+          {errors.price && (
+            <p className="text-red-600 text-sm mt-1">{errors.price.message}</p>
+          )}
         </div>
 
         {/* Stock input */}
         <div>
-          <label htmlFor="stock" className="block text-lg font-medium">Stock</label>
+          <label htmlFor="stock" className="block text-lg font-medium">
+            Stock
+          </label>
           <input
             type="number"
             id="stock"
@@ -134,12 +156,17 @@ export default function ItemForm() {
             className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-invalid={errors.stock ? "true" : "false"}
           />
-          {errors.stock && <p className="text-red-600 text-sm mt-1">{errors.stock.message}</p>}
+          {errors.stock && (
+            <p className="text-red-600 text-sm mt-1">{errors.stock.message}</p>
+          )}
         </div>
 
         {/* Is In Stock checkbox */}
         <div>
-          <label htmlFor="isInStock" className="text-lg font-medium flex items-center space-x-2">
+          <label
+            htmlFor="isInStock"
+            className="text-lg font-medium flex items-center space-x-2"
+          >
             <input
               type="checkbox"
               id="isInStock"
@@ -149,12 +176,18 @@ export default function ItemForm() {
             />
             <span>In Stock</span>
           </label>
-          {errors.isInStock && <p className="text-red-600 text-sm mt-1">{errors.isInStock.message}</p>}
+          {errors.isInStock && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.isInStock.message}
+            </p>
+          )}
         </div>
 
         {/* Category input */}
         <div>
-          <label htmlFor="category" className="block text-lg font-medium">Category ID</label>
+          <label htmlFor="category" className="block text-lg font-medium">
+            Category ID
+          </label>
           <input
             type="text"
             id="category"
@@ -162,7 +195,11 @@ export default function ItemForm() {
             className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-invalid={errors.category ? "true" : "false"}
           />
-          {errors.category && <p className="text-red-600 text-sm mt-1">{errors.category.message}</p>}
+          {errors.category && (
+            <p className="text-red-600 text-sm mt-1">
+              {errors.category.message}
+            </p>
+          )}
         </div>
 
         {/* Submit button */}

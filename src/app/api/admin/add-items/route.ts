@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     const { name, description, price, stock, isInStock, category, vendor } =
       fields;
 
-    if (!name || !description || !category || !vendor) {
+    if (!name || !description || !category ) {
       return NextResponse.json(
         new ApiError(400, "Please fill the required fields")
       );

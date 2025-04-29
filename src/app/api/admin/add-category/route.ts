@@ -2,17 +2,18 @@ import { ApiResponse } from "@/lib/ApiResponse";
 import { uploadOnCloudinary } from "@/lib/Cloudinary";
 import { mongoDb } from "@/lib/dbConnect";
 import { ApiError } from "@/lib/ErrorResponse";
-import { parseFormData } from "@/lib/parseFormData";
 import Category from "@/models/category.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   await mongoDb();
   try {
-    const { fields, files } = await parseFormData(req);
-    const { name, description, parentCategory } = fields;
-
-    if (!name || !description || !files.file) {
+    const data  = await req.formData()
+    const name =  data.get("name"); 
+    const description = data.get("description");
+    const fileU = data.get("file")
+    const parentCategory = data.get("parentCategory")
+    if (!name || !description || !fileU) {
       return NextResponse.json(new ApiError(400, "All fields are necessary"), {
         status: 400,
       });
@@ -27,8 +28,6 @@ export async function POST(req: NextRequest) {
         status: 400,
       });
     }
-
-    const file = Array.isArray(files.file) ? files.file : [files.file];
 
     // File validation: check for allowed types and size (example: image/jpeg, image/png)
     const allowedTypes = ["image/jpeg", "image/png"];
