@@ -1,18 +1,19 @@
 import { ApiResponse } from "@/lib/ApiResponse";
-import { uploadOnCloudinary } from "@/lib/Cloudinary";
 import { mongoDb } from "@/lib/dbConnect";
 import { ApiError } from "@/lib/ErrorResponse";
-import { parseFormData } from "@/lib/parseFormData";
+import { UploadFile } from "@/lib/uploadFile";
 import Category from "@/models/category.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   await mongoDb();
   try {
-    const { fields, files } = await parseFormData(req);
-    const { name, description, parentCategory } = fields;
-
-    if (!name || !description || !files.file) {
+    const data  = await req.formData()
+    const name =  data.get("name"); 
+    const description = data.get("description");
+    const fileU = data.get("file")
+    const parentCategory = data.get("parentCategory")
+    if (!name || !description || !fileU) {
       return NextResponse.json(new ApiError(400, "All fields are necessary"), {
         status: 400,
       });
@@ -28,37 +29,8 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const file = Array.isArray(files.file) ? files.file : [files.file];
-
-    // File validation: check for allowed types and size (example: image/jpeg, image/png)
-    const allowedTypes = ["image/jpeg", "image/png"];
-    const maxSize = 10 * 1024 * 1024; // 10 MB
-
-    for (const e of file) {
-      if (!allowedTypes.includes(e.mimetype!)) {
-        return NextResponse.json(new ApiError(400, "Invalid file type"), {
-          status: 400,
-        });
-      }
-      if (e.size > maxSize) {
-        return NextResponse.json(new ApiError(400, "File size exceeds limit"), {
-          status: 400,
-        });
-      }
-    }
-
-    // Upload files to Cloudinary
-    const uploadCloudinary = file.map((e: any) => uploadOnCloudinary(e));
-    const uploadedFiles = await Promise.all(uploadCloudinary);
-
-    if (!uploadedFiles || uploadedFiles.length === 0) {
-      return NextResponse.json(new ApiError(400, "File upload failed"), {
-        status: 400,
-      });
-    }
-
-    const url = uploadedFiles[0]?.url;
-
+    const UploadedUrlArray:string[] | null =  await UploadFile(fileU as File)
+    const url = UploadedUrlArray ? UploadedUrlArray[0] : ""
     // Create a new category with the uploaded cover image
     const newCategory = await Category.create({
       name,

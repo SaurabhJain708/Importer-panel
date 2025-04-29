@@ -11,7 +11,7 @@ interface Iitem extends Document {
   stock?: number;
   isInStock: boolean;
   category: mongoose.Types.ObjectId;
-  vendor?: mongoose.Types.ObjectId;
+  vendor?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -63,8 +63,7 @@ const itemSchema = new Schema<Iitem>(
       required: true,
     },
     vendor: {
-      type: Schema.Types.ObjectId,
-      ref: "Vendor",
+      type: String,
     },
   },
   {

@@ -72,17 +72,17 @@ export default function AdminDashboard() {
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
                 />
-                <Button size="sm">Add</Button>
+                <Button size="sm" onClick={()=>{router.push("/v2/admin/add-category")}}>Add</Button>
               </div>
             </CardContent>
             <CardFooter className="border-t p-4 flex justify-between">
-              <span className="text-sm text-gray-500">4 categories</span>
+              <span className="text-sm text-gray-500">Add items</span>
               <Button 
                 variant="outline" 
                 size="sm"
-                onClick={() => router.push('/admin/categories')}
+                onClick={() => router.push('/v2/admin/add-item/i')}
               >
-                View All
+                Add
               </Button>
             </CardFooter>
           </Card>
