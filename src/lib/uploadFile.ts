@@ -1,6 +1,8 @@
 import { uploadOnCloudinary } from "./Cloudinary";
 
-export async function UploadFile(file: File | File[]) {
+export async function UploadFile(
+  file: File | File[]
+): Promise<string[] | null> {
   try {
     const fileUpload = Array.isArray(file) ? file : [file];
     const allowedTypes = ["image/jpeg", "image/png"];
@@ -27,6 +29,6 @@ export async function UploadFile(file: File | File[]) {
     return urlArray;
   } catch (error) {
     console.log(error);
-    return error;
+    return null;
   }
 }
