@@ -1,55 +1,32 @@
 import { ApiResponse } from "@/lib/ApiResponse";
-import { uploadOnCloudinary } from "@/lib/Cloudinary";
+import { mongoDb } from "@/lib/dbConnect";
 import { ApiError } from "@/lib/ErrorResponse";
-import { parseFormData } from "@/lib/parseFormData";
+import { UploadFile } from "@/lib/uploadFile";
 import Item from "@/models/items.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
+  await mongoDb();
   try {
-    const { fields, files } = await parseFormData(req);
-    const { name, description, price, stock, isInStock, category, vendor } =
-      fields;
+    const data = await req.formData();
+    const name = data.get("name");
+    const description = data.get("description");
+    const price = data.get("price");
+    const stock = data.get("stock");
+    const isInStock = data.get("isInStock") === "true";
+    const category = data.get("category");
+    const vendor = data.get("vendor");
+    const fileU = data.get("file");
 
-    if (!name || !description || !category ) {
+    if (!name || !description || !category) {
       return NextResponse.json(
         new ApiError(400, "Please fill the required fields")
       );
     }
 
-    const fileToBeUploaded = Array.isArray(files.file)
-      ? files.file
-      : [files.file];
-
-    // File validation: check for allowed types and size (example: image/jpeg, image/png)
-    const allowedTypes = ["image/jpeg", "image/png"];
-    const maxSize = 10 * 1024 * 1024; // 10 MB
-
-    for (const e of fileToBeUploaded) {
-      if (!allowedTypes.includes(e?.mimetype!)) {
-        return NextResponse.json(new ApiError(400, "Invalid file type"), {
-          status: 400,
-        });
-      }
-
-      if (e?.size! > maxSize) {
-        return NextResponse.json(new ApiError(400, "File size exceeds limit"), {
-          status: 400,
-        });
-      }
-    }
-
-    const upload = fileToBeUploaded.map((e: any) => uploadOnCloudinary(e));
-    const uploadedFiles = await Promise.all(upload);
-
-    if (!uploadedFiles || uploadedFiles.length === 0) {
-      return NextResponse.json(new ApiError(400, "File upload failed"), {
-        status: 400,
-      });
-    }
-
-    const coverUrl = uploadedFiles[0]?.url;
-    const supportingurls = uploadedFiles.slice(0).map((file:any)=>file.url);
+    const uploadToCloud = await UploadFile(fileU as File);
+    const coverUrl = uploadToCloud ? uploadToCloud[0] : "";
+    const supportingurls = uploadToCloud ? uploadToCloud.slice(1) : [];
 
     const newItem = await Item.create({
       name,
