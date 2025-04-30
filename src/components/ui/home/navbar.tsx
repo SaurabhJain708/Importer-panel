@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function HomeNavbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-1 h-20 flex flex-col justify-center  bg-white shadow-md py-4">
+    <header className="fixed top-0 left-0 right-0 z-1 h-22 flex flex-col justify-center  bg-white shadow-md py-4">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between">
           {/* Logo & Brand */}

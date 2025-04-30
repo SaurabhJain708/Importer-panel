@@ -8,7 +8,7 @@ import { CatType } from "@/lib/Types/homeCategory.type";
 export default function Categories() {
   const [activeTab, setActiveTab] = useState("electronics");
   const [categories, setCategories] = useState<Array<CatType>>();
-
+  const [defaultCat,setDefaultCat] = useState("")
   useEffect(() => {
     const prepareCategoryArray = async () => {
       const response = await fetch("/api/user/get-categories");
@@ -30,6 +30,7 @@ export default function Categories() {
       });
 
       const fetched = await Promise.all(newRequest);
+      setDefaultCat(fetched[0]._id)
       setCategories(fetched);
     };
     prepareCategoryArray();
@@ -49,17 +50,17 @@ export default function Categories() {
 
           {categories && (
             <Tabs
-              defaultValue={categories[0]?._id}
+              defaultValue={defaultCat}
               value={activeTab}
               onValueChange={setActiveTab}
               className="w-full"
             >
-              <TabsList className="flex justify-center gap-4 flex-wrap mb-10">
+              <TabsList className="flex justify-center items-center h-20 px-6 gap-4 flex-wrap mb-10">
                 {categories.map((category) => (
                   <TabsTrigger
                     key={category._id}
                     value={category._id}
-                    className="text-base px-4 py-2 rounded-md bg-white border border-gray-200 shadow-sm hover:bg-gray-100 transition"
+                    className="text-base cursor-pointer px-4 py-2 h-12 rounded-md bg-white border border-gray-200 shadow-sm hover:bg-gray-100 transition"
                   >
                     {category.name}
                   </TabsTrigger>
@@ -84,7 +85,7 @@ export default function Categories() {
                       />
                       <h3 className="text-2xl font-semibold mt-5">{category.name}</h3>
                       <p className="text-gray-600 mt-2">{category.description}</p>
-                      <Button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 text-base rounded-md">
+                      <Button className="mt-6 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 text-base rounded-md">
                         View All Products
                       </Button>
                     </div>
