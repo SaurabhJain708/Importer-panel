@@ -18,7 +18,7 @@ export default function HomeNavbar() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
             <Link
-              href="/v1/home1"
+              href="/v1/home"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
             >
               Home
@@ -30,7 +30,7 @@ export default function HomeNavbar() {
               Categories
             </Link>
             <Link
-              href="/v1/services"
+              href="/v1/services-page"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
             >
               Services
@@ -58,7 +58,7 @@ export default function HomeNavbar() {
           {/* Mobile Menu Button + Login */}
           <div className="md:hidden flex items-center gap-3">
             <Link
-              href="/login"
+              href="/v1/sign-up"
               className="text-blue-600 font-medium hover:underline hidden sm:block"
             >
               Login
