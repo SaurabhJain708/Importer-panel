@@ -1,22 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Plus, ChevronRight, Loader } from "lucide-react";
+import { Loader } from "lucide-react";
 import {
   Card,
-  CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Cat } from "@/lib/Types/category.type";
 import { useRouter } from "next/navigation";
 
 export default function CategoriesShowcase() {
   const [categories, setCategories] = useState<Array<Cat>>();
-  const [selectedCategory, setSelectedCategory] = useState(null);
   const router = useRouter();
   useEffect(() => {
     const getCat = async () => {
@@ -31,7 +28,7 @@ export default function CategoriesShowcase() {
     getCat();
   }, []);
 
-  const formatDate = (date: any) => {
+  const formatDate = (date: Date) => {
     return new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",

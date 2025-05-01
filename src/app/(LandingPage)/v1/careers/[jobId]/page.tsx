@@ -42,7 +42,7 @@ export default function JobDetailPage() {
       <div className="container mx-auto px-4 py-16 text-center">
         <h1 className="text-2xl font-bold mb-4">Job Not Found</h1>
         <p className="mb-6 text-muted-foreground">
-          The job you're looking for doesn't exist or has been removed.
+          The job you&apos;re looking for doesn&apos;t exist or has been removed.
         </p>
         <Button asChild>
           <Link href="/careers">Back to Careers</Link>

@@ -2,9 +2,9 @@ import { ApiResponse } from "@/lib/ApiResponse";
 import { mongoDb } from "@/lib/dbConnect";
 import { ApiError } from "@/lib/ErrorResponse";
 import Category from "@/models/category.model";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     await mongoDb();
     const allCategories = await Category.find({}).sort({ createdAt: -1 });
@@ -19,6 +19,7 @@ export async function GET(req: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
+    console.log(error)
     return NextResponse.json(
       new ApiError(500, "Internal server error while fetching item data"),
       { status: 500 }

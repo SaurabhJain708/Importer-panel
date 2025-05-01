@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Star, Loader, ShoppingCart, Tag, DollarSign } from "lucide-react";
+import { Star, Loader, ShoppingCart, Tag } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -35,14 +35,16 @@ interface Product {
 
 export default function ProductsShowcase() {
   const [products, setProducts] = useState<Array<Product>>();
-  const {cate} = useParams()
+  const { cate } = useParams();
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         const data = await fetch(`/api/user/get-items/${cate}`);
         const result = await data.json();
-        const resultArr = Array.isArray(result.data) ? result.data : [result.data];
+        const resultArr = Array.isArray(result.data)
+          ? result.data
+          : [result.data];
         console.log(resultArr);
         setProducts(resultArr);
       } catch (error) {
@@ -50,9 +52,9 @@ export default function ProductsShowcase() {
       }
     };
     getProducts();
-  }, []);
+  }, [cate]);
 
-  const formatDate = (date: any) => {
+  const formatDate = (date: Date) => {
     return new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
@@ -75,7 +77,9 @@ export default function ProductsShowcase() {
           <Star
             key={i}
             className={`h-4 w-4 ${
-              i < Math.floor(rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+              i < Math.floor(rating)
+                ? "fill-yellow-400 text-yellow-400"
+                : "text-gray-300"
             }`}
           />
         ))}
@@ -131,7 +135,7 @@ export default function ProductsShowcase() {
           </div>
         )}
 
-        {products  &&
+        {products &&
           products.map((product) => (
             <motion.div
               key={product?._id}
@@ -209,17 +213,18 @@ export default function ProductsShowcase() {
             </motion.div>
           ))}
 
-        {!products || products[0] === null && (
-          <div className="flex flex-col items-center justify-center col-span-full py-16 text-center">
-            <div className="rounded-full bg-gray-100 p-4 mb-4">
-              <Tag className="h-8 w-8 text-gray-500" />
+        {!products ||
+          (products[0] === null && (
+            <div className="flex flex-col items-center justify-center col-span-full py-16 text-center">
+              <div className="rounded-full bg-gray-100 p-4 mb-4">
+                <Tag className="h-8 w-8 text-gray-500" />
+              </div>
+              <h3 className="text-lg font-medium mb-2">No products found</h3>
+              <p className="text-gray-500 mb-4 max-w-md">
+                There are no products available at the moment.
+              </p>
             </div>
-            <h3 className="text-lg font-medium mb-2">No products found</h3>
-            <p className="text-gray-500 mb-4 max-w-md">
-              There are no products available at the moment.
-            </p>
-          </div>
-        )}
+          ))}
       </motion.div>
     </div>
   );

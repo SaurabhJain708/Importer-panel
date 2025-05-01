@@ -2,9 +2,9 @@ import { mongoDb } from "@/lib/dbConnect";
 import { ContactData } from "@/models/contactData.model";
 import { ApiResponse } from "@/lib/ApiResponse";
 import { ApiError } from "@/lib/ErrorResponse";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     await mongoDb();
 
@@ -23,6 +23,7 @@ export async function GET(req: NextRequest) {
     );
     
   } catch (error) {
+    console.log(error)
     return NextResponse.json(
       new ApiError(500, "Internal server error while fetching contact data"),
       { status: 500 }

@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
       new ApiResponse(200, null, "User updated successfully")
     );
   } catch (error) {
+    console.log(error)
     return NextResponse.json(new ApiError(500, "Internal server error"), {
       status: 500,
     });

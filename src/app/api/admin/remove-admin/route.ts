@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
       new ApiResponse(200, null, "Admin removed successfully")
     );
   } catch (error) {
+    console.log(error)
     return NextResponse.json(
       new ApiError(500, "Internal server error, Admin not removed"),
       {

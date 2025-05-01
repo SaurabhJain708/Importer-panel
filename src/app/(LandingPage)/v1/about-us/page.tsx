@@ -72,7 +72,7 @@ export default function AboutUsPage() {
             <CardContent>
               <p className="text-gray-600">
                 Founded in 2008, Anantya Overseas started as a small export
-                business with big dreams. Our founder's vision was to create a
+                business with big dreams. Our founder&apos;s vision was to create a
                 global network of reliable trade partnerships.
               </p>
             </CardContent>
@@ -84,7 +84,7 @@ export default function AboutUsPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-600">
-                Over the years, we've expanded our operations across continents,
+                Over the years, we&apos;ve expanded our operations across continents,
                 diversified our product range, and built a reputation for
                 reliability and excellence in the global market.
               </p>
@@ -93,7 +93,7 @@ export default function AboutUsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Today's Success</CardTitle>
+              <CardTitle>Today&apos;s Success</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600">
@@ -114,7 +114,7 @@ export default function AboutUsPage() {
             <Separator className="w-24 mb-6" />
             <p className="text-gray-700 mb-6">
               To provide exceptional products and services that exceed our
-              customers' expectations, foster long-term relationships with our
+              customers&apos; expectations, foster long-term relationships with our
               partners, and contribute to the economic growth of the regions we
               operate in.
             </p>
@@ -247,7 +247,7 @@ export default function AboutUsPage() {
             {
               title: "Sustainable Practices",
               description:
-                "We're committed to environmentally responsible operations across our supply chain.",
+                "We&apos;re committed to environmentally responsible operations across our supply chain.",
             },
             {
               title: "Technological Integration",

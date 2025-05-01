@@ -2,14 +2,14 @@ import { ApiResponse } from "@/lib/ApiResponse";
 import { mongoDb } from "@/lib/dbConnect";
 import { ApiError } from "@/lib/ErrorResponse";
 import Item from "@/models/items.model";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 interface Context {
   params: {
     category: string;
   };
 }
-export async function GET(req: NextRequest, context: Context) {
+export async function GET(context: Context) {
   try {
     await mongoDb();
     const { category } = await context.params;
@@ -26,6 +26,7 @@ export async function GET(req: NextRequest, context: Context) {
       { status: 200 }
     );
   } catch (error) {
+    console.log(error)
     return NextResponse.json(
       new ApiError(
         500,

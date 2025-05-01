@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
       new ApiResponse(200, null, "Category removed successfully")
     );
   } catch (error) {
+    console.log(error)
     return NextResponse.json(
       new ApiError(500, "Internal server error, Category not removed"),
       { status: 500 }

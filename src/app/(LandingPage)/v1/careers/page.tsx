@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import HeroBanner from "@/components/careers/HeroBanner";
 import JobListings from "@/components/careers/JobListings";
 import CompanyCulture from "@/components/careers/CompanyCulture";
@@ -24,7 +23,7 @@ export default function CareersPage() {
         <div className="flex flex-col items-center text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Join Our Team</h2>
           <p className="text-muted-foreground max-w-2xl">
-            We're on a mission to revolutionize the tech import industry with innovation and excellence.
+            We&apos;re on a mission to revolutionize the tech import industry with innovation and excellence.
             Join us and be part of something extraordinary.
           </p>
         </div>
