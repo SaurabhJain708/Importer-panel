@@ -4,15 +4,14 @@ import { ApiError } from "@/lib/ErrorResponse";
 import Item from "@/models/items.model";
 import { NextRequest, NextResponse } from "next/server";
 
-interface Context {
-  params: {
-    category: string;
-  };
-}
-export async function GET( _req: NextRequest,context: Context) {
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: { category: string } }
+) {
   try {
     await mongoDb();
-    const { category } = await context.params;
+
+    const { category } = params;
 
     const categoryItems = await Item.find({ category }).sort({ createdAt: -1 });
 
@@ -21,17 +20,15 @@ export async function GET( _req: NextRequest,context: Context) {
         status: 404,
       });
     }
+
     return NextResponse.json(
       new ApiResponse(200, categoryItems, "Item data fetched successfully"),
       { status: 200 }
     );
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return NextResponse.json(
-      new ApiError(
-        500,
-        "Internal server error while fetching category item data"
-      ),
+      new ApiError(500, "Internal server error while fetching category item data"),
       { status: 500 }
     );
   }
