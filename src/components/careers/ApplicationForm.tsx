@@ -25,7 +25,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { applicationFormSchema } from "@/lib/careers/schema";
 import type { JobListing } from "@/lib/careers/types";
-import { useToast } from "@/hooks/use-toast";
+// import { useToast } from "@/hooks/use-toast";
 
 interface ApplicationFormProps {
   job: JobListing;
@@ -33,7 +33,7 @@ interface ApplicationFormProps {
 }
 
 const ApplicationForm = ({ job, onSubmit }: ApplicationFormProps) => {
-  const { toast } = useToast();
+  // const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm({
@@ -60,10 +60,10 @@ const ApplicationForm = ({ job, onSubmit }: ApplicationFormProps) => {
     
     console.log("Form submitted:", values);
     
-    toast({
-      title: "Application Submitted",
-      description: "Thank you for applying! We'll be in touch soon.",
-    });
+    // toast({
+    //   title: "Application Submitted",
+    //   description: "Thank you for applying! We'll be in touch soon.",
+    // });
     
     setIsSubmitting(false);
     onSubmit();
