@@ -25,7 +25,7 @@ export default function PhoneSidebar() {
     },
     {
       label: "Sign In",
-      href: "/v1/login",
+      href: "/v1/sign-up",
       icon: LogIn,
     },
     {
