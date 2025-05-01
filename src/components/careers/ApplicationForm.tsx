@@ -52,7 +52,7 @@ const ApplicationForm = ({ job, onSubmit }: ApplicationFormProps) => {
     },
   });
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values:unknown) => {
     setIsSubmitting(true);
     
     // Simulate API call

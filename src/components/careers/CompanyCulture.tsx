@@ -62,7 +62,7 @@ const CompanyCulture = () => {
                 <div>
                   <h3 className="text-xl font-semibold mb-2">Growth & Development</h3>
                   <p className="text-muted-foreground">
-                    We invest in our people's professional growth and provide opportunities for continuous learning.
+                    We invest in our people&apos;s professional growth and provide opportunities for continuous learning.
                   </p>
                 </div>
               </div>

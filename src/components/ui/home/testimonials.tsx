@@ -73,7 +73,7 @@ export default function Testimonials() {
               >
                 {/* Decorative quote marks */}
                 <div className="absolute top-4 right-4 text-5xl font-serif text-blue-100">
-                  "
+                  &quot;
                 </div>
 
                 <div className="flex items-center mb-4">
@@ -96,7 +96,7 @@ export default function Testimonials() {
                   </div>
                 </div>
 
-                <p className="text-gray-700 italic">"{testimonial.content}"</p>
+                <p className="text-gray-700 italic">&quot;{testimonial.content}&quot;</p>
 
                 <div className="mt-4 text-yellow-500">★★★★★</div>
               </m.div>

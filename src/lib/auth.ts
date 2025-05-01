@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user}) {
       await mongoDb(); // make sure DB is connected
 
       const existingUser = await User.findOne({ email: user.email });
@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
       return true; // allow sign in
     },
 
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;

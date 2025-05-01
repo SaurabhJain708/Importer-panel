@@ -40,7 +40,7 @@ const Testimonials = () => {
                     <div className="absolute -top-8 right-6 bg-primary text-primary-foreground p-2 rounded-full">
                       <Quote className="h-6 w-6" />
                     </div>
-                    <p className="text-muted-foreground mb-6 italic">"{testimonial.quote}"</p>
+                    <p className="text-muted-foreground mb-6 italic">&quot;{testimonial.quote}&quot;</p>
                     <div>
                       <h4 className="font-semibold text-lg">{testimonial.name}</h4>
                       <p className="text-muted-foreground text-sm">{testimonial.role}</p>

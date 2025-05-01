@@ -5,7 +5,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import JobCard from "@/components/careers/JobCard";
-import { JobListing } from "@/lib/careers/types";
 import { jobListings } from "@/lib/careers/data";
 
 const JobListings = () => {

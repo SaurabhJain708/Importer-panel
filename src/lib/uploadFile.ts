@@ -25,7 +25,7 @@ export async function UploadFile(
       return uploadOnCloudinary(dataURI);
     });
     const uploaded = await Promise.all(uploading);
-    const urlArray = uploaded.map((obj: any) => obj.url);
+    const urlArray = uploaded.map((obj) => obj!.url);
     return urlArray;
   } catch (error) {
     console.log(error);

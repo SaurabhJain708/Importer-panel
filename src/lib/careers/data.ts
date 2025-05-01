@@ -1,8 +1,4 @@
 import { JobListing, Testimonial, Benefit, FAQ } from "./types";
-import { 
-  Briefcase, Heart, Coffee, Globe, Building, Award, 
-  GraduationCap, Clock, CalendarDays, Gift
-} from "lucide-react";
 
 export const jobListings: JobListing[] = [
   {
