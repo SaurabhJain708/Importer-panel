@@ -24,10 +24,10 @@ export default function HomeNavbar() {
               Home
             </Link>
             <Link
-              href="/v2/products"
+              href="/v2/category"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
             >
-              Products
+              Categories
             </Link>
             <Link
               href="/v1/services"

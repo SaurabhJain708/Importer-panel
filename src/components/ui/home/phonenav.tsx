@@ -19,8 +19,8 @@ export default function PhoneSidebar() {
 
   const navItems = [
     {
-      label: "Dashboard",
-      href: "/v2/dashboard",
+      label: "Categories",
+      href: "/v2/category",
       icon: LayoutDashboard,
     },
     {
@@ -30,7 +30,7 @@ export default function PhoneSidebar() {
     },
     {
       label: "Services",
-      href: "/v1/services",
+      href: "/v1/services-page",
       icon: Star,
     },
     {
@@ -41,6 +41,11 @@ export default function PhoneSidebar() {
     {
       label: "Careers",
       href: "/v1/careers",
+      icon: Briefcase,
+    },
+    {
+      label: "Contact Us",
+      href: "/v1/contact",
       icon: Briefcase,
     },
   ];

@@ -15,7 +15,7 @@ interface item {
   updatedAt: Date;
 }
 export interface CatType {
-    _id:string;
+  _id: string;
   name: string;
   description?: string;
   coverImage?: string;
