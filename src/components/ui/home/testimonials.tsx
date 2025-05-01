@@ -54,7 +54,7 @@ export default function Testimonials() {
         <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-5xl opacity-10 -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-5xl opacity-10 translate-x-1/2 translate-y-1/2"></div>
 
-        <div className="container mx-auto relative z-10">
+        <div className="container mx-auto relative z-[0.1]">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-white">
               Client Success Stories

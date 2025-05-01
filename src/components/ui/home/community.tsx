@@ -17,7 +17,7 @@ export default function Community(){
         </div>
 
         {/* Content */}
-        <div className="container mx-auto relative z-10">
+        <div className="container mx-auto relative z-[0.1]">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6">Join Our Community</h2>
             <p className="text-xl text-blue-100 mb-10">

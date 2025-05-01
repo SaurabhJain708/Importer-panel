@@ -12,7 +12,7 @@ interface Context {
 export async function GET(req: NextRequest, context: Context) {
   try {
     await mongoDb();
-    const { category } = context.params;
+    const { category } = await context.params;
 
     const categoryItems = await Item.find({ category }).sort({ createdAt: -1 });
 
