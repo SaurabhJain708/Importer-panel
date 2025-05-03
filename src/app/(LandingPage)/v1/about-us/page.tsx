@@ -261,7 +261,7 @@ export default function AboutUs() {
                 Our team conducts thorough analyses of both exporter capabilities and importer requirements to ensure ideal partnerships. Our comprehensive knowledge of international trade regulations, documentation requirements, and logistics solutions allows us to navigate the complexities of cross-border commerce on behalf of our clients.
               </p>
               <p className="text-lg text-gray-700">
-                We don't just connect businesses; we facilitate successful, sustainable trading relationships.
+                We don&apos;t just connect businesses; we facilitate successful, sustainable trading relationships.
               </p>
             </motion.div>
           </div>
@@ -322,7 +322,7 @@ export default function AboutUs() {
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Expand Your Global Reach?</h2>
             <p className="text-xl text-indigo-100 mb-8">
-              Let's connect and explore how Anatya Overseas can help your business thrive in international markets.
+              Let&apos;s connect and explore how Anatya Overseas can help your business thrive in international markets.
             </p>
             <motion.button
               className="px-8 py-4 bg-white text-indigo-800 rounded-full text-lg font-bold shadow-lg hover:bg-indigo-100 transition-all"
