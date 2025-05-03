@@ -7,7 +7,6 @@ import Community from "@/components/ui/home/community";
 import Footer from "@/components/ui/home/footer";
 import Video from "@/components/ui/home/video";
 import Testimonials from "@/components/ui/home/testimonials";
-import Partners from "@/components/ui/home/partners";
 import Categories from "@/components/ui/home/categories";
 import PhoneSidebar from "@/components/ui/home/phonenav";
 

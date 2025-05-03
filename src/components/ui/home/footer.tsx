@@ -1,4 +1,4 @@
-import { Globe, Mail, PhoneCall } from "lucide-react";
+import { Mail} from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
