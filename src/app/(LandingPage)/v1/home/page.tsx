@@ -37,9 +37,6 @@ export default function AnantyaOverseasUI() {
       {/* Testimonials */}
       <Testimonials />
 
-      {/* <Partners/> */}
-      <Partners />
-
       {/* Community */}
       <Community />
 

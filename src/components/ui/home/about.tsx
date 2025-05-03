@@ -15,7 +15,7 @@ export default function About() {
               </h1>
               <p className="text-lg text-gray-600 mb-6">
                 A cutting-edge tech import platform bridging Chinese
-                manufacturers and global buyers since 2018.
+                manufacturers and global buyers.
               </p>
               <div className="space-y-4">
                 <p className="text-gray-600">
