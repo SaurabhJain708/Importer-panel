@@ -1,8 +1,10 @@
 "use client";
 import { m, LazyMotion, domAnimation } from "framer-motion";
 import { BadgeCheck, Box, ChevronRight, Clock } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function HeroSection() {
+  const router = useRouter();
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -28,12 +30,12 @@ export default function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
-            <button className="bg-blue-600 cursor-pointer sm:w-[245px] w-[235px] text-white px-6 py-4 rounded-xl font-semibold flex items-center gap-3 hover:bg-blue-700 transition-colors text-sm md:text-base">
+            <button onClick={()=>{router.push("/v2/category")}} className="bg-blue-600 cursor-pointer sm:w-[245px] w-[235px] text-white px-6 py-4 rounded-xl font-semibold flex items-center gap-3 hover:bg-blue-700 transition-colors text-sm md:text-base">
               <Box size={20} />
               Browse Products
               <ChevronRight size={20} />
             </button>
-            <button className="bg-white cursor-pointer sm:w-[220px] w-[205px] border-2 border-blue-600 text-blue-600 px-6 py-4 rounded-xl font-semibold flex items-center gap-3 hover:bg-blue-50 transition-colors text-sm md:text-base">
+            <button onClick={()=>{router.push("/v1/contact")}} className="bg-white cursor-pointer sm:w-[220px] w-[205px] border-2 border-blue-600 text-blue-600 px-6 py-4 rounded-xl font-semibold flex items-center gap-3 hover:bg-blue-50 transition-colors text-sm md:text-base">
               <Clock size={20} />
               Process Timeline
             </button>

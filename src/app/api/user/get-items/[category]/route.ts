@@ -13,7 +13,7 @@ export async function GET(
 
     const { category } = await context.params;
 
-    const categoryItems = await Item.find({ category }).sort({ createdAt: -1 });
+    const categoryItems = await Item.find({ category:category }).sort({ createdAt: -1 });
 
     if (!categoryItems || categoryItems.length === 0) {
       return NextResponse.json(new ApiError(404, "No Item data found"), {
